@@ -20,7 +20,7 @@ public class Cliente {
                      new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
              Scanner teclado = new Scanner(System.in, StandardCharsets.UTF_8)) {
 
-            System.out.print("Digite uma mensagem: ");
+            System.out.print("Digite seu nome: ");
 
             if (!teclado.hasNextLine()) {
                 return;

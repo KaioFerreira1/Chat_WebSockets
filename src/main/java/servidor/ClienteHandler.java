@@ -1,5 +1,7 @@
 package servidor;
 
+import dominio.Participante;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ClienteHandler implements Runnable {
     private final Socket socket;
+    private Participante participante;
 
     public ClienteHandler(Socket socket) {
         this.socket = socket;
@@ -22,14 +25,23 @@ public class ClienteHandler implements Runnable {
              PrintWriter saida = new PrintWriter(
                      new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true)) {
 
-            System.out.println("Cliente conectado na " + Thread.currentThread().getName() + ".");
+            String nome = entrada.readLine();
 
-            String linha = entrada.readLine();
-            System.out.println("Recebido: " + linha);
-
-            if (linha != null) {
-                saida.println(linha);
+            if (nome == null) {
+                return;
             }
+
+            try {
+                participante = new Participante(nome);
+            } catch (IllegalArgumentException e) {
+                saida.println("Nome inválido. A conexão será encerrada.");
+                System.out.println("Nome recusado na " + Thread.currentThread().getName() + ".");
+                return;
+            }
+
+            saida.println("Bem-vindo, " + participante.getNome() + "!");
+            System.out.println("Cliente conectado: " + participante.getNome()
+                    + " na " + Thread.currentThread().getName() + ".");
         } catch (IOException e) {
             System.out.println("Falha ao atender o cliente.");
         } finally {
@@ -39,5 +51,9 @@ public class ClienteHandler implements Runnable {
                 System.out.println("Falha ao fechar a conexão.");
             }
         }
+    }
+
+    public Participante getParticipante() {
+        return participante;
     }
 }
