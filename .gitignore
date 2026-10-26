@@ -1,10 +1,12 @@
 # Compilação
 out/
 bin/
+target/
 *.class
 
 # IntelliJ
 .idea/
+*.iml
 
 # Eclipse
 .classpath

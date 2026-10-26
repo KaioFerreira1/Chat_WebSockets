@@ -6,33 +6,35 @@ O nome do repositório cita WebSockets, mas a avaliação pede **sockets TCP** (
 
 ## Tecnologias
 
-- Java 21, só a biblioteca padrão (`java.net` e `java.io`)
+- Java 21
+- Maven, sem dependências externas por enquanto
+- Biblioteca padrão (`java.net` e `java.io`)
 - Aplicação de console, sem interface gráfica
-- Sem framework e sem banco de dados na versão obrigatória
+- Sem banco de dados na versão obrigatória
 
 ## Estrutura
 
 | Pasta | Papel |
 | --- | --- |
-| `src/servidor` | Processo que aceita conexões e distribui as mensagens |
-| `src/cliente` | Programa que cada pessoa abre em um terminal |
-| `src/dominio` | Dados do chat que não dependem da rede, como participante e mensagem |
+| `src/main/java/servidor` | Processo que aceita conexões e distribui as mensagens |
+| `src/main/java/cliente` | Programa que cada pessoa abre em um terminal |
+| `src/main/java/dominio` | Dados do chat que não dependem da rede, como participante e mensagem |
 
-O código de cada pasta entra nos commits seguintes. Nesta versão o repositório só tem a estrutura.
+O código de cada pasta entra nos commits seguintes. Nesta versão o repositório só tem a estrutura e o `pom.xml`.
 
 ## Como executar
 
-Quando `Servidor` e `Cliente` existirem, a partir da raiz do projeto:
+Na raiz do projeto, o Maven Wrapper baixa o Maven na primeira vez. Quando `Servidor` e `Cliente` existirem:
 
 ```text
-javac -encoding UTF-8 -d out src/dominio/*.java src/servidor/*.java src/cliente/*.java
-java -cp out servidor.Servidor
-java -cp out cliente.Cliente
+mvnw.cmd compile
+mvnw.cmd exec:java -Dexec.mainClass=servidor.Servidor
+mvnw.cmd exec:java -Dexec.mainClass=cliente.Cliente
 ```
 
 O servidor sobe primeiro, na porta 5000. O teste obrigatório usa um servidor e três clientes, cada um no próprio terminal.
 
-No IntelliJ, abra o arquivo `Chat_WebSockets.iml`. A pasta `src` já está marcada como código-fonte.
+No IntelliJ, abra a pasta do projeto. Ele reconhece o `pom.xml` e usa o Maven embutido. Para os três clientes, execute a classe `cliente.Cliente` em três terminais.
 
 ## O que a dupla precisa demonstrar
 
