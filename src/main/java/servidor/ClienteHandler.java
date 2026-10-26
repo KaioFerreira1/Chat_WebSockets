@@ -72,6 +72,8 @@ public class ClienteHandler implements Runnable {
                 saida = null;
             }
 
+            servidor.removerCliente(this);
+
             try {
                 socket.close();
             } catch (IOException e) {

@@ -26,6 +26,22 @@ public class Servidor {
         clientes.add(cliente);
     }
 
+    public void removerCliente(ClienteHandler cliente) {
+        boolean removeu;
+
+        synchronized (this) {
+            removeu = clientes.remove(cliente);
+        }
+
+        if (!removeu || cliente.getParticipante() == null) {
+            return;
+        }
+
+        String aviso = cliente.getParticipante().getNome() + " saiu.";
+        System.out.println(aviso);
+        transmitir(aviso);
+    }
+
     public void transmitir(String mensagem) {
         for (ClienteHandler cliente : clientes) {
             cliente.enviarMensagem(mensagem);
