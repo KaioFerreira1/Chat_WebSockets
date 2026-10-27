@@ -19,8 +19,9 @@ O nome do repositório cita WebSockets, mas a avaliação usa **sockets TCP** (`
 - Cada mensagem vai para todos, inclusive para quem enviou, no formato `Ana: texto`. Linha em branco é ignorada.
 - Quando alguém sai, o servidor tira essa conexão da lista e avisa os outros com `Ana saiu.` O servidor e os clientes restantes continuam.
 - Cliente e servidor trocam texto em UTF-8.
+- O comando `/listar` responde só para quem digitou. Exemplo: `Online (3): Ana, Bruno, Caio`.
 
-Ainda não há comandos (`/listar`, `/sair`, `/privado`), histórico, salas, envio de arquivo nem banco de dados.
+Ainda não há os comandos `/sair` e `/privado`, nem histórico, salas, envio de arquivo ou banco de dados.
 
 ## Estrutura
 
@@ -53,13 +54,6 @@ No IntelliJ, abra a pasta do projeto para ele importar o `pom.xml`. Execute `ser
 
 Para sair de um cliente, feche o terminal ou use Ctrl+C. O servidor permanece no ar até o terminal dele ser fechado.
 
-## Demo com três clientes
+## Na apresentação
 
-1. Suba o servidor. A saída esperada é `Servidor aguardando clientes na porta 5000.`
-2. Abra três clientes. Use os nomes `Ana`, `Bruno` e `Caio`.
-3. Cada um vê a própria boas-vindas. Quem já estava conectado vê `Bruno entrou.` e `Caio entrou.`
-4. Na `Ana`, digite `oi`. Os três terminais mostram `Ana: oi`.
-5. Feche o terminal da `Ana`. `Bruno` e `Caio` mostram `Ana saiu.`
-6. No `Bruno`, digite `ainda aqui`. O `Caio` mostra `Bruno: ainda aqui`.
-
-O servidor continua aceitando conexão depois que a `Ana` sai. Um quarto cliente pode entrar com outro nome e conversar com quem ficou.
+Abra um terminal com o servidor e três terminais com o cliente. Em cada cliente, digite um nome e depois as mensagens. Feche um dos clientes para mostrar que os outros continuam.
