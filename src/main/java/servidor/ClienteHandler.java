@@ -43,13 +43,12 @@ public class ClienteHandler implements Runnable {
                 participante = new Participante(nome);
             } catch (IllegalArgumentException e) {
                 enviarMensagem("Nome inválido. A conexão será encerrada.");
-                System.out.println("Nome recusado na " + Thread.currentThread().getName() + ".");
+                System.out.println("Recusado: nome vazio.");
                 return;
             }
 
             enviarMensagem("Bem-vindo, " + participante.getNome() + "!");
-            System.out.println("Cliente conectado: " + participante.getNome()
-                    + " na " + Thread.currentThread().getName() + ".");
+            System.out.println("Entrou: " + participante.getNome());
 
             servidor.adicionarCliente(this);
             servidor.transmitirExceto(this, participante.getNome() + " entrou.");
@@ -62,18 +61,17 @@ public class ClienteHandler implements Runnable {
                 }
 
                 if (mensagem.trim().equals("/listar")) {
-                    System.out.println(participante.getNome() + " consultou a lista.");
+                    System.out.println("Lista: " + participante.getNome());
                     enviarMensagem(servidor.listarOnline());
                     continue;
                 }
 
                 if (mensagem.trim().equals("/sair")) {
-                    System.out.println(participante.getNome() + " pediu para sair.");
                     break;
                 }
 
                 String texto = participante.getNome() + ": " + mensagem;
-                System.out.println(texto);
+                System.out.println("Mensagem: " + texto);
                 servidor.transmitir(texto);
             }
         } catch (IOException e) {

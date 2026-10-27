@@ -40,7 +40,7 @@ public class Servidor {
         }
 
         String aviso = cliente.getParticipante().getNome() + " saiu.";
-        System.out.println(aviso);
+        System.out.println("Saiu: " + cliente.getParticipante().getNome());
         transmitir(aviso);
     }
 
