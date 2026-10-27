@@ -61,6 +61,12 @@ public class ClienteHandler implements Runnable {
                     continue;
                 }
 
+                if (mensagem.trim().equals("/listar")) {
+                    System.out.println(participante.getNome() + " consultou a lista.");
+                    enviarMensagem(servidor.listarOnline());
+                    continue;
+                }
+
                 String texto = participante.getNome() + ": " + mensagem;
                 System.out.println(texto);
                 servidor.transmitir(texto);

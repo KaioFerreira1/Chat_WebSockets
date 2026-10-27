@@ -1,5 +1,7 @@
 package servidor;
 
+import dominio.Participante;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -40,6 +42,28 @@ public class Servidor {
         String aviso = cliente.getParticipante().getNome() + " saiu.";
         System.out.println(aviso);
         transmitir(aviso);
+    }
+
+    public String listarOnline() {
+        StringBuilder nomes = new StringBuilder();
+        int quantidade = 0;
+
+        for (ClienteHandler cliente : clientes) {
+            Participante participante = cliente.getParticipante();
+
+            if (participante == null) {
+                continue;
+            }
+
+            if (quantidade > 0) {
+                nomes.append(", ");
+            }
+
+            nomes.append(participante.getNome());
+            quantidade++;
+        }
+
+        return "Online (" + quantidade + "): " + nomes;
     }
 
     public void transmitir(String mensagem) {
