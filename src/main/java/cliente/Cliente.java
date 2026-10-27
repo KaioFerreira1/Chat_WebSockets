@@ -48,10 +48,19 @@ public class Cliente {
             leitor.setDaemon(true);
             leitor.start();
 
-            System.out.println("Digite as mensagens. Feche a entrada para sair.");
+            System.out.println("Digite as mensagens. Use /sair para sair.");
 
             while (teclado.hasNextLine()) {
-                saida.println(teclado.nextLine());
+                String mensagem = teclado.nextLine();
+
+                if (mensagem.trim().equals("/sair")) {
+                    saindo = true;
+                    saida.println("/sair");
+                    System.out.println("Você saiu.");
+                    break;
+                }
+
+                saida.println(mensagem);
             }
 
             saindo = true;

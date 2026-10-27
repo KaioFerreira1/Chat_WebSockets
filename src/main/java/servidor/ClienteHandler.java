@@ -67,6 +67,11 @@ public class ClienteHandler implements Runnable {
                     continue;
                 }
 
+                if (mensagem.trim().equals("/sair")) {
+                    System.out.println(participante.getNome() + " pediu para sair.");
+                    break;
+                }
+
                 String texto = participante.getNome() + ": " + mensagem;
                 System.out.println(texto);
                 servidor.transmitir(texto);

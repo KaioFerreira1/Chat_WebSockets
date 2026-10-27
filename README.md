@@ -20,8 +20,9 @@ O nome do repositório cita WebSockets, mas a avaliação usa **sockets TCP** (`
 - Quando alguém sai, o servidor tira essa conexão da lista e avisa os outros com `Ana saiu.` O servidor e os clientes restantes continuam.
 - Cliente e servidor trocam texto em UTF-8.
 - O comando `/listar` responde só para quem digitou. Exemplo: `Online (3): Ana, Bruno, Caio`.
+- O comando `/sair` encerra só quem digitou. Os outros recebem o aviso de saída.
 
-Ainda não há os comandos `/sair` e `/privado`, nem histórico, salas, envio de arquivo ou banco de dados.
+Ainda não há o comando `/privado`, nem histórico, salas, envio de arquivo ou banco de dados.
 
 ## Estrutura
 
@@ -52,7 +53,7 @@ No PowerShell as aspas em `"-Dexec.mainClass=..."` são necessárias. No Linux o
 
 No IntelliJ, abra a pasta do projeto para ele importar o `pom.xml`. Execute `servidor.Servidor` e, em seguida, `cliente.Cliente` uma vez por pessoa.
 
-Para sair de um cliente, feche o terminal ou use Ctrl+C. O servidor permanece no ar até o terminal dele ser fechado.
+Para sair de um cliente, digite `/sair`. Fechar o terminal também encerra. O servidor permanece no ar até o terminal dele ser fechado.
 
 ## Na apresentação
 
