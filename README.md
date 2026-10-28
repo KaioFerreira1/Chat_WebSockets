@@ -55,7 +55,3 @@ No PowerShell as aspas em `"-Dexec.mainClass=..."` são necessárias. No Linux o
 No IntelliJ, abra a pasta do projeto para ele importar o `pom.xml`. Execute `servidor.Servidor` e, em seguida, `cliente.Cliente` uma vez por pessoa.
 
 Para sair de um cliente, digite `/sair`. Fechar o terminal também encerra. O servidor permanece no ar até o terminal dele ser fechado.
-
-## Na apresentação
-
-Abra um terminal com o servidor e três terminais com o cliente. Em cada cliente, digite um nome e depois as mensagens. Em um deles, use `/privado` com o nome de outro cliente. Feche um dos clientes para mostrar que os outros continuam.
