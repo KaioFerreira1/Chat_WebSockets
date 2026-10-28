@@ -21,8 +21,9 @@ O nome do repositório cita WebSockets, mas a avaliação usa **sockets TCP** (`
 - Cliente e servidor trocam texto em UTF-8.
 - O comando `/listar` responde só para quem digitou. Exemplo: `Online (3): Ana, Bruno, Caio`.
 - O comando `/sair` encerra só quem digitou. Os outros recebem o aviso de saída.
+- O comando `/privado` envia um texto só para um participante. Exemplo: `/privado Bruno oi`. Bruno vê `(privado) Ana: oi` e Ana vê `(privado para Bruno): oi`. Os demais não recebem essa mensagem. O destino é a primeira palavra depois do comando. Se ninguém com esse nome estiver online, só quem enviou vê `Bruno não está online.`
 
-Ainda não há o comando `/privado`, nem histórico, salas, envio de arquivo ou banco de dados.
+Ainda não há histórico, salas, envio de arquivo ou banco de dados.
 
 ## Estrutura
 
@@ -57,4 +58,4 @@ Para sair de um cliente, digite `/sair`. Fechar o terminal também encerra. O se
 
 ## Na apresentação
 
-Abra um terminal com o servidor e três terminais com o cliente. Em cada cliente, digite um nome e depois as mensagens. Feche um dos clientes para mostrar que os outros continuam.
+Abra um terminal com o servidor e três terminais com o cliente. Em cada cliente, digite um nome e depois as mensagens. Em um deles, use `/privado` com o nome de outro cliente. Feche um dos clientes para mostrar que os outros continuam.

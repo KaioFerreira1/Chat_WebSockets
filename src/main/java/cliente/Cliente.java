@@ -48,7 +48,7 @@ public class Cliente {
             leitor.setDaemon(true);
             leitor.start();
 
-            System.out.println("Digite as mensagens. Use /sair para sair.");
+            System.out.println("Digite as mensagens. Use /listar, /privado nome texto ou /sair.");
 
             while (teclado.hasNextLine()) {
                 String mensagem = teclado.nextLine();

@@ -70,6 +70,11 @@ public class ClienteHandler implements Runnable {
                     break;
                 }
 
+                if (ehComandoPrivado(mensagem)) {
+                    tratarPrivado(mensagem.trim());
+                    continue;
+                }
+
                 String texto = participante.getNome() + ": " + mensagem;
                 System.out.println("Mensagem: " + texto);
                 servidor.transmitir(texto);
@@ -89,6 +94,44 @@ public class ClienteHandler implements Runnable {
                 System.out.println("Falha ao fechar a conexão.");
             }
         }
+    }
+
+    private boolean ehComandoPrivado(String mensagem) {
+        String texto = mensagem.trim();
+        return texto.equals("/privado") || texto.startsWith("/privado ");
+    }
+
+    private void tratarPrivado(String mensagem) {
+        String resto = mensagem.substring("/privado".length()).trim();
+        int espaco = resto.indexOf(' ');
+
+        if (resto.isEmpty() || espaco < 0) {
+            enviarMensagem("Uso: /privado nome texto");
+            return;
+        }
+
+        String destino = resto.substring(0, espaco);
+        String texto = resto.substring(espaco + 1).trim();
+
+        if (texto.isEmpty()) {
+            enviarMensagem("Uso: /privado nome texto");
+            return;
+        }
+
+        ClienteHandler alvo = servidor.buscarCliente(destino, this);
+
+        if (alvo == null) {
+            if (destino.equals(participante.getNome())) {
+                enviarMensagem("Escolha outro participante.");
+            } else {
+                enviarMensagem(destino + " não está online.");
+            }
+            return;
+        }
+
+        System.out.println("Privado: " + participante.getNome() + " para " + destino + ": " + texto);
+        enviarMensagem("(privado para " + destino + "): " + texto);
+        alvo.enviarMensagem("(privado) " + participante.getNome() + ": " + texto);
     }
 
     public synchronized void enviarMensagem(String mensagem) {

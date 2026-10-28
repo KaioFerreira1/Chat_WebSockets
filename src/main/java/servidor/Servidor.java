@@ -80,6 +80,22 @@ public class Servidor {
         }
     }
 
+    public ClienteHandler buscarCliente(String nome, ClienteHandler exceto) {
+        for (ClienteHandler cliente : clientes) {
+            if (cliente == exceto) {
+                continue;
+            }
+
+            Participante participante = cliente.getParticipante();
+
+            if (participante != null && participante.getNome().equals(nome)) {
+                return cliente;
+            }
+        }
+
+        return null;
+    }
+
     public static void main(String[] args) throws IOException {
         new Servidor().iniciar();
     }
